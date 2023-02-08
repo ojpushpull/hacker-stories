@@ -1,17 +1,41 @@
 import * as React from 'react';
 
+const list = [
+  {
+    title: 'React',
+    url: 'http://reeactjs.org',
+    author: 'Jordan alke',
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: 'Redux',
+    url: 'http://redux.js.org',
+    author: 'Dan abramov, andrew clarke',
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
 
 
-function getTitle(title) {
-  return title + ' please';
-}
+
 function App() {
   return (
     <div>
-      <h1>Hello {getTitle('React')}</h1>
+      <h1>My hacker story</h1>
 
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" />
+
+      <hr />
+
+      <ul>
+      {list.map(function(item){
+        return <li>{item.title}</li>;
+      })}
+      </ul>
     </div>
   );
 }
