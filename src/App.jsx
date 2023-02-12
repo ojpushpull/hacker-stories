@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-const list = [
+
+
+
+
+const App = () => {
+  const stories = [
   {
     title: 'React',
     url: 'http://reeactjs.org',
@@ -18,10 +23,6 @@ const list = [
     objectID: 1,
   },
 ];
-
-
-
-function App() {
   return (
     <div>
       <h1>My hacker story</h1>
@@ -29,7 +30,7 @@ function App() {
       <Search />
       <hr />
 
-      <List />
+      <List list={stories}/>
     </div>
   );
 }
@@ -48,11 +49,11 @@ const Search = () => {
   )
 }
 
-function List(){
+function List(props){
   return (
     <ul>
-      {list.map(function (item) {
-        return (
+      {props.list.map((item) => 
+        (
     <li key={item.objectID}>
        <span>
          <a href={item.url}>{item.title}</a>
@@ -68,8 +69,8 @@ function List(){
             {item.points}
             </span>
             </li>
-  );
-})}
+  
+))}
 </ul>
   );
 }
