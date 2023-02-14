@@ -24,9 +24,16 @@ const App = () => {
   },
 ];
 
+const [searchTerm, setSearchTerm] = React.useState('');
+
 const handleSearch = (event) => {
-  console.log(event.target.value);
-}
+  setSearchTerm(event.target.value);
+};
+
+const searchedStories = stories.filter(function (story) {
+  return story.title.includes(searchTerm);
+});
+
   return (
     <div>
       <h1>My hacker story</h1>
@@ -35,26 +42,25 @@ const handleSearch = (event) => {
       <Search onSearch={handleSearch}/>
       <hr />
 
-      <List list={stories}/>
+      <List list={searchedStories}/>
     </div>
   );
 }
 
 const Search = (props) => {
-  const [searchTerm, setSearchTerm] = React.useState('');
+  
 
 
   const handleChange = (event) => {
-  setSearchTerm(event.target.value);
-
+    props.searchTerm(event);
     props.onSearch(event);
   };
   return (
     <div>
 
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-      <p> Searching for <strong>{searchTerm}</strong></p>
+      <input id="search" type="text" onChange={props.onSearch} />
+      <p> Searching for </p>
     </div>
   )
 }
