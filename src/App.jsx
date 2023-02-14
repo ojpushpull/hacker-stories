@@ -30,9 +30,9 @@ const handleSearch = (event) => {
   setSearchTerm(event.target.value);
 };
 
-const searchedStories = stories.filter(function (story) {
-  return story.title.includes(searchTerm);
-});
+const searchedStories = stories.filter((story) =>
+  story.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
   return (
     <div>
