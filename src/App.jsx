@@ -52,7 +52,6 @@ const Search = (props) => {
 
 
   const handleChange = (event) => {
-    props.searchTerm(event);
     props.onSearch(event);
   };
   return (
