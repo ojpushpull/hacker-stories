@@ -47,18 +47,15 @@ const searchedStories = stories.filter((story) =>
   );
 }
 
-const Search = (props) => {
+const Search = (props) => { 
+  const { search, onSearch } = props;
   
 
-
-  const handleChange = (event) => {
-    props.onSearch(event);
-  };
   return (
     <div>
 
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" value={props.search} onChange={props.onSearch} />
+      <input id="search" type="text" value={search} onChange={onSearch} />
       <p> Searching for </p>
     </div>
   )
