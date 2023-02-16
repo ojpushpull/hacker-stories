@@ -63,9 +63,9 @@ const Search = ({ search, onSearch }) => {
 const List = ({list}) =>
 (
     <ul>
-      {list.map((item) => 
+      {list.map(({objectID, ...item}) => 
         (
-          <Item key={item.objectID} 
+          <Item key={objectID} 
           {...item} />
    ))}
 </ul>
