@@ -53,14 +53,33 @@ const searchedStories = stories.filter((story) =>
     <div>
       <h1>My hacker story</h1>
 
+      <InputWithLabel
+      id="search"
+      label="Search"
+      value={searchTerm}
+      onInputChange={handleSearch}
+    />
+
     {/* // B */}
-      <Search search={searchTerm} onSearch={handleSearch}/>
       <hr />
 
       <List list={searchedStories}/>
     </div>
   );
 };
+
+const InputWithLabel = ({ id, label, value, type = 'text', onInputChange }) => (
+  <>
+    <label htmlFor={id}>{label}</label>
+    &nbsp;
+    <input
+      id={id}
+      type={type}
+      value={value}
+      onChange={onInputChange}
+    />
+  </>
+);
 
 const Search = ({ search, onSearch }) => (
 
