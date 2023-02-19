@@ -11,7 +11,7 @@ const useStorageState = (key, initialState) => {
     localStorage.setItem(key, value);
   }, [value, key]);
 
-  return [searchTerm, setSearchTerm];
+  return [value,setValue]
 };
 
 const App = () => {
