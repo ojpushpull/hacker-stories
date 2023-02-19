@@ -62,18 +62,20 @@ const searchedStories = stories.filter((story) =>
   );
 };
 
-const Search = ({ search, onSearch }) => { 
-  
+const Search = ({ search, onSearch }) => (
 
-  return (
-    <div>
+  <React.Fragment>
+  <label htmlFor="search"> Search: </label>
+    <input 
+      
+      id="search" 
+      type="text" 
+      value={search} 
+      onChange={onSearch} 
+     />
+    </React.Fragment>
+);
 
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" value={search} onChange={onSearch} />
-      <p> Searching for </p>
-    </div>
-  )
-}
 
 const List = ({list}) =>
 (
