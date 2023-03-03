@@ -49,7 +49,7 @@ const getAsyncStories = () =>
     return (action.payload)
      case 'REMOVE_STORY':
       return state.filter(
-        (story) => action,payload.objectID !== story,objectID
+        (story) => action.payload.objectID !== story.objectID
       );
    default:
       throw new Error();
@@ -92,6 +92,8 @@ const [stories, dispatchStories] = React.useReducer(
   []
 );
 
+
+
 React.useEffect(()  => {
   setIsLoading(true);
 
@@ -104,6 +106,7 @@ React.useEffect(()  => {
   })
   .catch(() => setIsError(true));
 }, []);
+
 
 
 const handleRemoveStory = (item) => {
