@@ -94,10 +94,8 @@ const [searchTerm, setSearchTerm] = useStorageState(
   'search',
   'React');
 
-
-React.useEffect(()  => {
-
-  if (!searchTerm) return;
+const handleFetchStories = React.useCallback(() =>  {
+   if (!searchTerm) return;
 
   dispatchStories({ type: 'STORIES_FETCH_INIT'});
 
@@ -113,6 +111,13 @@ React.useEffect(()  => {
   dispatchStories({ type: 'STORIES_FETCH_FAILURE'})
   );
 }, [searchTerm]);
+
+
+React.useEffect(()  => {
+  handleFetchStories();
+}, [handleFetchStories]);
+
+ 
 
 
 
