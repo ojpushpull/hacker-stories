@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimaryButton from './PrimaryButton';
+import axios from 'axios';
 
 
 
@@ -103,13 +104,14 @@ const handleFetchStories = React.useCallback(() =>  {
    if (!searchTerm) return;
 
   dispatchStories({ type: 'STORIES_FETCH_INIT'});
-
-  fetch(url)
+  
+  axios
+  .get(url)
   .then((response) => response.json())
   .then((result) => {
     dispatchStories({
       type: 'STORIES_FETCH_SUCCESS',
-      payload: result.hits,
+      payload: result.data.hits,
     });
   })
   .catch(() => 
