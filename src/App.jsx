@@ -54,6 +54,7 @@ const useStorageState = (key, initialState) => {
     }
     };
   
+ 
 
  const stories = [
   {
@@ -94,12 +95,16 @@ const [searchTerm, setSearchTerm] = useStorageState(
   'search',
   'React');
 
+const [url, setUrl] = React.useState(
+  `${API_ENDPOINT}${searchTerm}`
+);
+
 const handleFetchStories = React.useCallback(() =>  {
    if (!searchTerm) return;
 
   dispatchStories({ type: 'STORIES_FETCH_INIT'});
 
-  fetch(`${API_ENDPOINT}${searchTerm}`)
+  fetch(url)
   .then((response) => response.json())
   .then((result) => {
     dispatchStories({
@@ -110,7 +115,7 @@ const handleFetchStories = React.useCallback(() =>  {
   .catch(() => 
   dispatchStories({ type: 'STORIES_FETCH_FAILURE'})
   );
-}, [searchTerm]);
+}, [url]);
 
 
 React.useEffect(()  => {
@@ -118,6 +123,13 @@ React.useEffect(()  => {
 }, [handleFetchStories]);
 
  
+const handleSearchInput = (event) => {
+  setSearchTerm(event.target.value);
+};
+
+const handleSearchSubmit = () => {
+  setUrl(`${API_ENDPOINT}${searchTerm}`);
+};
 
 
 
@@ -144,11 +156,17 @@ const handleSearch = (event) => {
       id="search"
       value={searchTerm}
       isFocused
-      onInputChange={handleSearch}
+      onInputChange={handleSearchInput}
     >
       <strong>Search:</strong>
       </InputWithLabel>
-   
+   <button 
+   type="button"
+   disabled={!searchTerm}
+   onClick={handleSearchSubmit}
+   >
+    Submit
+   </button>
 
     {/* // B */}
       <hr />
