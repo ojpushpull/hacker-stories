@@ -87,6 +87,15 @@ const useStorageState = (key, initialState) => {
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
+const getSumComments = (stories) => {
+  console.log('c');
+
+  return stories.data.reduce(
+    (result, value) => result + value.num_comments,
+    0
+  );
+};
+
 const App = () => {
 
   
@@ -146,12 +155,12 @@ const handleSearchSubmit = (event) => {
 
 
 
-const handleRemoveStory = (item) => {
+const handleRemoveStory = React.useCallback((item) => {
   dispatchStories({
     type: 'REMOVE_STORY',
     payload: item,
   });
-};
+}, []);
 
 
 
@@ -185,9 +194,13 @@ const SearchForm = ({
 );
 
   console.log('B:APP');
+  const sumComments = React.useMemo(
+    () => getSumComments(stories),
+    [stories]
+  );
   return (
     <div>
-      <h1>My hacker story</h1>
+      <h1>My hacker story with {sumComments} comments</h1>
 
       
    <SearchForm
@@ -251,7 +264,8 @@ const Search = ({ search, onSearch }) => (
 );
 
 
-const List = ({list, onRemoveItem}) =>
+const List = React.memo(
+  ({list, onRemoveItem}) =>
   console.log('B:List') || (
     <ul>
       {list.map((item) => 
@@ -262,6 +276,7 @@ const List = ({list, onRemoveItem}) =>
           />
    ))}
 </ul>
+  )
   );
 
   const Item = ({ item, onRemoveItem }) => (
