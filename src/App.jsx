@@ -6,12 +6,19 @@ import axios from 'axios';
 
 
 const useStorageState = (key, initialState) => {
+  const isMounted = React.useRef(false);
+
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
   );
 
   React.useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    } else {
+    console.log('A')
     localStorage.setItem(key, value);
+    }
   }, [value, key]);
 
   return [value,setValue]
@@ -177,6 +184,7 @@ const SearchForm = ({
    </form>
 );
 
+  console.log('B:APP');
   return (
     <div>
       <h1>My hacker story</h1>
@@ -244,7 +252,7 @@ const Search = ({ search, onSearch }) => (
 
 
 const List = ({list, onRemoveItem}) =>
-(
+  console.log('B:List') || (
     <ul>
       {list.map((item) => 
         (
